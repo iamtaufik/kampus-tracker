@@ -1,9 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const { ofetch } = require('ofetch');
-const dotenv = require('dotenv');
-dotenv.config();
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import { ofetch } from 'ofetch';
+import path from 'path';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -64,14 +63,14 @@ app.get('/api/all', async (req, res) => {
   }
 });
 
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/client/dist')));
+if (process.env.NODE_ENV === 'production') {
+  // const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html')));
-// if (process.env.NODE_ENV === 'production') {
-// } else {
-//   app.get('/', (req, res) => res.send('Server Ready'));
-// }
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html')));
+} else {
+  app.get('/', (req, res) => res.send('Server Ready'));
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
