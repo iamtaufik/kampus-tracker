@@ -63,14 +63,14 @@ app.get('/api/all', async (req, res) => {
   }
 });
 
-if (process.env.NODE_ENV === 'production') {
-  const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, '/client/dist')));
-  
-  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html')));
-} else {
-  app.get('/', (req, res) => res.send('Server Ready'));
-}
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html')));
+// if (process.env.NODE_ENV === 'production') {
+// } else {
+//   app.get('/', (req, res) => res.send('Server Ready'));
+// }
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
