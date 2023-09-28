@@ -1,8 +1,9 @@
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
-import { ofetch } from 'ofetch';
-import path from 'path';
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const { ofetch } = require('ofetch');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
