@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const {ofetch} = require('ofetch');
+const { ofetch } = require('ofetch');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -59,6 +59,43 @@ app.get('/api/all', async (req, res) => {
     const data = mahasiswa.mahasiswa.concat(dosen.dosen);
 
     return res.status(200).json({ data });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/data_mahasiswa/:id', async (req, res) => {
+  try {
+    const response = await ofetch(`${process.env.BASE_URL}/detail_mhs/${req.params.id}`, {
+      method: 'GET',
+      responseType: 'json',
+      parseResponse: JSON.parse,
+    });
+    return res.status(200).json({ data: response.dataumum });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+app.get('/api/data_dosen/:id', async (req, res) => {
+  try {
+    const response = await ofetch(`${process.env.BASE_URL}/detail_dosen/${req.params.id}`, {
+      method: 'GET',
+      responseType: 'json',
+      parseResponse: JSON.parse,
+    });
+    return res.status(200).json({ data: response.dataumum });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+app.get('/api/data_mahasiswa/:id', async (req, res) => {
+  try {
+    const response = await ofetch(`${process.env.BASE_URL}/data_mahasiswa/${req.params.id}`, {
+      method: 'GET',
+      responseType: 'json',
+      parseResponse: JSON.parse,
+    });
+    return res.status(200).json({ data: response.dataumum });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
