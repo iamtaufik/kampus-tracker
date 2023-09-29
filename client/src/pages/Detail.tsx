@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const BASE_URL = '/api';
+
 const Detail = () => {
   const { id, category } = useParams<{ id: string; category: string }>();
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +13,7 @@ const Detail = () => {
   const getData = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get(`http://localhost:3000/api/${category}/${id}`);
+      const { data } = await axios.get(`${BASE_URL}/${category}/${id}`);
       setData(data.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
