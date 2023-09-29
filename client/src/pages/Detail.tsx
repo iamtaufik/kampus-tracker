@@ -115,7 +115,7 @@ const Detail = () => {
           </li>
         </ul>
       </div>
-      {isActive && (
+      {isActive && !isLoading && (
         <div>
           <h1 className="text-xl ">Riwayat Status Kuliah</h1>
           <table className="table">
@@ -140,7 +140,7 @@ const Detail = () => {
           </table>
         </div>
       )}
-      {!isActive && (
+      {!isActive && !isLoading && (
         <div>
           <h1 className="text-xl ">Riwayat Studi</h1>
           <table className="table">
