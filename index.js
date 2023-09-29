@@ -71,7 +71,13 @@ app.get('/api/data_mahasiswa/:id', async (req, res) => {
       responseType: 'json',
       parseResponse: JSON.parse,
     });
-    return res.status(200).json({ data: response.dataumum });
+    return res.status(200).json({
+      data: {
+        dataUmum: response.dataumum,
+        dataKuliah: response.datastatuskuliah,
+        dataStudi: response.datastudi,
+      },
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
