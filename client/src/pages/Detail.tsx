@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -50,9 +50,9 @@ const Detail = () => {
     <div className="container mt-10">
       <h1 className="text-xl">Biodata {category === 'data_mahasiswa' ? 'Mahasiswa' : 'Dosen'}</h1>
       <div className="my-4">
-        <a href="/" className="px-4 py-2 font-bold text-white rounded bg-zinc-500 hover:bg-zinc-600">
+        <Link to="/" className="px-4 py-2 font-bold text-white rounded bg-zinc-900 hover:bg-zinc-700">
           Kembali
-        </a>
+        </Link>
       </div>
       <div className="flex justify-center w-full mt-10">
         {isLoading && <p className="text-center">Tunggu...</p>}
@@ -113,10 +113,10 @@ const Detail = () => {
       {!isLoading && (
         <div className="my-4">
           <ul className="flex gap-2">
-            <li onClick={() => setIsActive(!isActive)} className={`cursor-pointer ${isActive ? 'underline' : ''}`}>
+            <li onClick={() => setIsActive(!isActive)} className={`cursor-pointer ${isActive ? 'underline' : 'text-zinc-400'}`}>
               Riwayat Status Kuliah
             </li>
-            <li onClick={() => setIsActive(!isActive)} className={`cursor-pointer ${!isActive ? 'underline' : ''}`}>
+            <li onClick={() => setIsActive(!isActive)} className={`cursor-pointer ${!isActive ? 'underline' : 'text-zinc-400'}`}>
               Riwayat Studi
             </li>
           </ul>
