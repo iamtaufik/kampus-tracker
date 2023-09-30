@@ -105,16 +105,18 @@ const Detail = () => {
           </table>
         )}
       </div>
-      <div>
-        <ul className="flex gap-2">
-          <li onClick={() => setIsActive(!isActive)} className={isActive ? 'underline' : ''}>
-            Riwayat Status Kuliah
-          </li>
-          <li onClick={() => setIsActive(!isActive)} className={!isActive ? 'underline' : ''}>
-            Riwayat Studi
-          </li>
-        </ul>
-      </div>
+      {!isLoading && (
+        <div>
+          <ul className="flex gap-2">
+            <li onClick={() => setIsActive(!isActive)} className={isActive ? 'underline' : ''}>
+              Riwayat Status Kuliah
+            </li>
+            <li onClick={() => setIsActive(!isActive)} className={!isActive ? 'underline' : ''}>
+              Riwayat Studi
+            </li>
+          </ul>
+        </div>
+      )}
       {isActive && !isLoading && (
         <div>
           <h1 className="text-xl ">Riwayat Status Kuliah</h1>
