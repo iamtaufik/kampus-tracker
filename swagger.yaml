@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  title: Kampus Tracker
+  version: 1.0.0
+servers:
+  - url: https://kampus-tracker.vercel.app/api
+tags:
+  - name: Mahasiswa
+    description: Semua tentang mahasiswa
+  - name: Dosen
+    description: Semua tentang dosen
+paths:
+  /mahasiswa:
+    get:
+      tags:
+        - Mahasiswa
+      operationId: get-all-mahasiswa
+      summary: Cari semua mahasiswa
+      description: Menampilkan list mahasiswa
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+            example: 'Taufik Amikom Informatika'
+          required: true
+          description: mencari berdasarkan nama mahasiswa, nama kampus atau jurusan
+      responses:
+        '200':
+          description: Operasi sukses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                          example: 'TAUFIK TAUFIK(22610261024), PT : UNIVERSITAS NEGERI YOGYAKARTA, Prodi: PENDIDIKAN KEPELATIHAN OLAHRAGA'
+                        website-link:
+                          type: string
+                          example: '/data_mahasiswa/RjdFN0NDQTMtRDEzMS00MTVELTg3OTQtQkU4NzI2OEJENjA2'
+  /data_mahasiswa/{id}:
+    get:
+      tags:
+        - Mahasiswa
+      operationId: get-detail-mahasiswa
+      summary: detail mahasiswa
+      description: Detail mahasiswa
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: 'QkFEQzE1MzMtNjlFMi00ODJBLThFMzAtQTQwM0RENTY4QUQz'
+          required: true
+          description: Cari detail mahasiswa berdasarkan id
+      responses:
+        '200':
+          description: Operasi sukses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      dataUmum:
+                        type: object
+                        properties:
+                          nm_pd:
+                            type: string
+                            example: 'Muhammad Taufik Hidayat'
+                          jk:
+                            type: string
+                            example: 'L'
+                          nipd:
+                            type: string
+                            example: '21.11.4316'
+                          namapt:
+                            type: string
+                            example: 'Universitas Amikom Yogyakarta'
+                          namajenjang:
+                            type: string
+                            example: 'S1'
+                          namaprodi:
+                            type: string
+                            example: 'Informatika'
+                          reg_pd:
+                            type: string
+                            example: 'BADC1533-69E2-482A-8E30-A403DD568AD3'
+                          mulai_smt:
+                            type: integer
+                            example: 20211
+                          nm_jns_daftar:
+                            type: string
+                            example: 'Peserta didik baru'
+                          nm_pt_asal:
+                            type: string
+                            example: null
+                          nm_prodi_asal:
+                            type: string
+                            example: null
+                          ket_keluar:
+                            type: string
+                            example: null
+                          tgl_keluar:
+                            type: string
+                            example: null
+                          no_seri_ijazah:
+                            type: string
+                            example: null
+                          sert_prof:
+                            type: string
+                            example: null
+                          link_pt:
+                            type: string
+                            example: '/data_pt/QzJERjg3QzMtMUE0RC00RjFBLTlDREYtNERENEY1NzBDQUE1'
+                          link_prodi:
+                            type: string
+                            example: '/data_prodi/QTg2NTVBMkYtNURCOS00RDRGLTgxOEQtNDU3RUE3MzQ4NTc5'
+                      dataKuliah:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id_smt:
+                              type: integer
+                              example: 20211
+                            sks_smt:
+                              type: integer
+                              example: 22
+                            nm_stat_mhs:
+                              type: string
+                              example: 'Aktif'
+                      dataStudi:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            kode_mk:
+                              type: string
+                              example: 'ST139'
+                            nm_mk:
+                              type: string
+                              example: 'PENGANTAR ILMU KOMPUTER'
+                            sks_mk:
+                              type: integer
+                              example: 2
+                            id_smt:
+                              type: integer
+                              example: 20211
+                            nilai_huruf:
+                              type: string
+                              example: null
+  /dosen:
+    get:
+      tags:
+        - Dosen
+      operationId: get-all-dosen
+      summary: Cari semua dosen
+      description: Menampilkan list dosen
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+            example: 'Sandhika Galih Universitas Pasundan Bandung'
+          required: true
+          description: mencari berdasarkan nama dosen, nama kampus
+      responses:
+        '200':
+          description: Operasi sukses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                          example: 'TAUFIK TAUFIK(22610261024), PT : UNIVERSITAS NEGERI YOGYAKARTA, Prodi: PENDIDIKAN KEPELATIHAN OLAHRAGA'
+                        website-link:
+                          type: string
+                          example: '/data_mahasiswa/RjdFN0NDQTMtRDEzMS00MTVELTg3OTQtQkU4NzI2OEJENjA2'
+  /data_dosen/{id}:
+    get:
+      tags:
+        - Dosen
+      operationId: get-detail-dosen
+      summary: Detail dosen
+      description: Menampilkan detail dosen
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: 'RjRDNUJGN0EtNUNEQy00NzcwLTgxMUYtMDNENkU0MjdBREIy'
+          required: true
+          description: mencari berdasarkan id dosen
+      responses:
+        '200':
+          description: Operasi sukses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id_sdm:
+                        type: string
+                        example: '760C6D90-58FD-4A43-B98E-F2B11048E149'
+                      nm_sdm:
+                        type: string
+                        example: 'R SANDHIKA GALIH AMALGA'
+                      jk:
+                        type: string
+                        example: 'L'
+                      tmpt_lahir:
+                        type: string
+                        example: 'Bandung'
+                      namapt:
+                        type: string
+                        example: 'Universitas Pasundan'
+                      linkpt:
+                        type: string
+                        example: '/data_pt/MEFBMzk4QTItNkM2OC00RUUwLTg2RkEtM0VBNjVCNTREQzk3'
+                      link_prodi:
+                        type: string
+                        example: '/data_prodi/MUQ1QUNCRkQtQzJENC00MzRCLTgzQkItQjRFN0MzNDM5QzZE'
+                      namaprodi:
+                        type: string
+                        example: 'Teknik Informatika'
+                      statuskeaktifan:
+                        type: string
+                        example: 'Aktif'
+                      pend_tinggi:
+                        type: string
+                        example: 'S2'
+                      fungsional:
+                        type: string
+                        example: 'Asisten Ahli'
+                      foto:
+                        type: string
+                        example: 'base64 image format'
+                      ikatankerja:
+                        type: string
+                        example: 'Dosen Tetap'
