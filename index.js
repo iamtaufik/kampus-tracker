@@ -17,8 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 const file = fs.readFileSync(path.join(__dirname, './swagger.yaml'), 'utf8');
 const swaggerDocument = yaml.parse(file);
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css' }));
-
 app.get('/api/mahasiswa', async (req, res) => {
   try {
     const q = req.query.search;
@@ -117,10 +115,12 @@ app.get('/api/data_dosen/:id', async (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   // const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, '/client/dist')));
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css' }));
 
   app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html')));
 } else {
   app.get('/', (req, res) => res.send('Server Ready'));
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css' }));
 }
 
 app.listen(PORT, () => {
