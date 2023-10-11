@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const file = fs.readFileSync(path.join(__dirname, './swagger.yaml'), 'utf8');
 const swaggerDocument = yaml.parse(file);
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css' }));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.0/swagger-ui.min.css' }));
 
 app.get('/api/mahasiswa', async (req, res) => {
   try {
