@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { ofetch } = require('ofetch');
+const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
+const yaml = require('yaml');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -11,6 +14,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const file = fs.readFileSync('./swagger.yaml', 'utf8');
+const swaggerDocument = yaml.parse(file);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/api/mahasiswa', async (req, res) => {
   try {
@@ -94,18 +101,18 @@ app.get('/api/data_dosen/:id', async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
-app.get('/api/data_mahasiswa/:id', async (req, res) => {
-  try {
-    const response = await ofetch(`${process.env.BASE_URL}/data_mahasiswa/${req.params.id}`, {
-      method: 'GET',
-      responseType: 'json',
-      parseResponse: JSON.parse,
-    });
-    return res.status(200).json({ data: response.dataumum });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+// app.get('/api/data_mahasiswa/:id', async (req, res) => {
+//   try {
+//     const response = await ofetch(`${process.env.BASE_URL}/data_mahasiswa/${req.params.id}`, {
+//       method: 'GET',
+//       responseType: 'json',
+//       parseResponse: JSON.parse,
+//     });
+//     return res.status(200).json({ data: response.dataumum });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
 
 if (process.env.NODE_ENV === 'production') {
   // const __dirname = path.resolve();
