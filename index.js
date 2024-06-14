@@ -99,18 +99,6 @@ app.get('/api/data_dosen/:id', async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
-// app.get('/api/data_mahasiswa/:id', async (req, res) => {
-//   try {
-//     const response = await ofetch(`${process.env.BASE_URL}/data_mahasiswa/${req.params.id}`, {
-//       method: 'GET',
-//       responseType: 'json',
-//       parseResponse: JSON.parse,
-//     });
-//     return res.status(200).json({ data: response.dataumum });
-//   } catch (error) {
-//     return res.status(500).json({ error: error.message });
-//   }
-// });
 
 if (process.env.NODE_ENV === 'production') {
   // const __dirname = path.resolve();
